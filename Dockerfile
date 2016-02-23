@@ -12,5 +12,7 @@ COPY . ${BIN_DIR}
 
 WORKDIR ${BIN_DIR}
 
-ENTRYPOINT ["./run.sh"]
+ENTRYPOINT ["./container-entrypoint"]
+CMD ["./run"]
+
 USER 1000
