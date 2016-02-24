@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: image-pruner
+spec:
+  containers:
+  - image: getupcloud/imagepruner:latest
+    name: pruner
+    tty: true
+    stdin: true
+    args:
+      - '/bin/bash'
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+  serviceAccount: image-pruner
+  nodeSelector:
+    role: infra

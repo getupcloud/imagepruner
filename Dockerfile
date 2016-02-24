@@ -3,16 +3,17 @@ FROM openshift/origin:latest
 MAINTAINER Diego Castro <diego.castro@getupcloud.com>
 
 ENV BIN_DIR=/opt/pruner \
-    KUBECONFIG=/etc/deploy/.kubeconfig \
+    HOME=/etc/pruner
+    KUBECONFIG=/etc/pruner/.kubeconfig \
     WRITE_KUBECONFIG=1
 
-RUN mkdir -p ${BIN_DIR} && chmod 777 ${BIN_DIR}
+RUN mkdir -p ${HOME} ${BIN_DIR} && chmod 777 ${HOME} && chmod 555 ${BIN_DIR}
 
 COPY . ${BIN_DIR}
 
 WORKDIR ${BIN_DIR}
 
+VOLUME ${HOME}
 ENTRYPOINT ["./container-entrypoint.sh"]
 CMD ["./run.sh"]
-
 USER 1000
