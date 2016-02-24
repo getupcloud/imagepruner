@@ -47,5 +47,8 @@ The image must run under a service account defined as follows:
 Note: change `:default:` above to match the project name.
 
 
+##Schedule the pod:
 
-  
+  ```
+  $ oc create -f image-pruner.yaml
+  ```
