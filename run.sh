@@ -1,9 +1,9 @@
 #!/bin/bash
 
-keep-complete=${KEEP_COMPLETE:-5}
-keep-failed=${KEEP_FAILED:-1}
-keep-tags=${KEEP_TAGS:-5}
-keep-younger=${KEEP_YOUNGER:-24h}
+keep_complete=${KEEP_COMPLETE:-5}
+keep_failed=${KEEP_FAILED:-1}
+keep_tags=${KEEP_TAGS:-5}
+keep_younger=${KEEP_YOUNGER:-24h}
 
 # only needed for writing a kubeconfig:
 master_url=${MASTER_URL:-https://kubernetes.default.svc.cluster.local:443}
@@ -28,8 +28,17 @@ if [ -n "${WRITE_KUBECONFIG}" ]; then
     oc config use-context current
 fi
 
-oc adm prune deployments --orphans --keep-complete=$keep-complete --keep-failed=$keep-failed --keep-younger-than=$keep-younger --confirm
+#prune deployments and builds
+for i in deployments builds; do
+  oc adm prune $i --orphans \
+  --keep-complete=$keep_complete \
+  --keep-failed=$keep_failed \
+  --keep-younger-than=$keep_younger \
+  --confirm
+done
 
-oc adm prune builds --orphans --keep-complete=$keep-complete --keep-failed=$keep-failed --keep-younger-than=keep-younger --confirm
-
-oc adm prune images --keep-tag-revisions=$keep-tags --keep-younger-than=$keep-younger --confirm
+#prune images 
+oc adm prune images \
+--keep-tag-revisions=$keep_tags \
+--keep-younger-than=$keep_younger \
+--confirm
