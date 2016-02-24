@@ -3,7 +3,7 @@ FROM openshift/origin:latest
 MAINTAINER Diego Castro <diego.castro@getupcloud.com>
 
 ENV BIN_DIR=/opt/pruner \
-    HOME=/etc/pruner
+    HOME=/etc/pruner \
     KUBECONFIG=/etc/pruner/.kubeconfig \
     WRITE_KUBECONFIG=1
 
