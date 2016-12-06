@@ -41,7 +41,7 @@ The image must run under a service account defined as follows:
   EOF
 
   $ oc policy add-role-to-user cluster-admin \
-      system:serviceaccount:deafult:image-pruner
+      system:serviceaccount:default:image-pruner
   ```
 
 Note: change `:default:` above to match the project name.
