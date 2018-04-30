@@ -1,6 +1,6 @@
 FROM openshift/origin:latest
 
-MAINTAINER Diego Castro <diego.castro@getupcloud.com>
+MAINTAINER Mateus Caruccio <mateus.caruccio@getupcloud.com>
 
 ENV BIN_DIR=/opt/pruner \
     HOME=/etc/pruner \
@@ -14,6 +14,9 @@ COPY . ${BIN_DIR}
 WORKDIR ${BIN_DIR}
 
 VOLUME ${HOME}
+
 ENTRYPOINT ["./container-entrypoint.sh"]
+
 CMD ["./run.sh"]
+
 USER 1000
