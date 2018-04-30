@@ -1,9 +1,9 @@
 #!/bin/bash
 
-keep_complete=${KEEP_COMPLETE:-5}
-keep_failed=${KEEP_FAILED:-1}
-keep_tags=${KEEP_TAGS:-5}
-keep_younger=${KEEP_YOUNGER:-24h}
+keep_complete=${KEEP_COMPLETE:-10}
+keep_failed=${KEEP_FAILED:-10}
+keep_tags=${KEEP_TAGS:-10}
+keep_younger=${KEEP_YOUNGER:-720h}
 
 # only needed for writing a kubeconfig:
 master_url=${MASTER_URL:-https://kubernetes.default.svc.cluster.local:443}
@@ -16,7 +16,6 @@ project=${PROJECT:-default}
 if [ -n "${WRITE_KUBECONFIG}" ]; then
     # craft a kubeconfig, usually at $KUBECONFIG location
     oc config set-cluster master \
-  --api-version='v1' \
   --certificate-authority="${master_ca}" \
   --server="${master_url}"
     oc config set-credentials account \
