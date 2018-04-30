@@ -14,6 +14,7 @@ project=${PROJECT:-default}
 
 # set up configuration for openshift client
 if [ -n "${WRITE_KUBECONFIG}" ]; then
+    echo Creating kube config
     # craft a kubeconfig, usually at $KUBECONFIG location
     oc config set-cluster master \
   --certificate-authority="${master_ca}" \
@@ -29,15 +30,21 @@ fi
 
 #prune deployments and builds
 for i in deployments builds; do
-  oc adm prune $i --orphans \
+  cmd="oc adm prune $i --orphans \
   --keep-complete=$keep_complete \
   --keep-failed=$keep_failed \
   --keep-younger-than=$keep_younger \
-  --confirm
+  --confirm"
+  echo
+  echo "---> $cmd"
+  eval $cmd
 done
 
 #prune images 
-oc adm prune images \
+cmd="oc adm prune images \
 --keep-tag-revisions=$keep_tags \
 --keep-younger-than=$keep_younger \
---confirm
+--confirm"
+echo
+echo "---> $cmd"
+eval $cmd
