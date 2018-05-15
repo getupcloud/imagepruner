@@ -40,7 +40,7 @@ The image must run under a service account defined as follows:
   - name: image-pruner
   EOF
 
-  $ oc policy add-role-to-user cluster-admin \
+  $ oc adm policy add-cluster-role-to-user cluster-admin \
       system:serviceaccount:default:image-pruner
   ```
 
