@@ -2,7 +2,7 @@
 
 set -x
 
-oc delete pods -l role=pruner -n default
+oc delete pods -l role=pruner -n default || true
 
 oc create -f - -n default <<EOF
 apiVersion: v1
@@ -17,14 +17,13 @@ spec:
     name: pruner
     env:
       - name: KEEP_COMPLETE
-        value:
+        value: 10
       - name: KEEP_FAILED
-        value:
+        value: 10
       - name: KEEP_TAGS
-        value:
+        value: 10
       - name: KEEP_YOUNGER
-        value:
-  dnsPolicy: ClusterFirst
+        value: 720h
   restartPolicy: Never
   serviceAccount: image-pruner
   nodeSelector:
