@@ -1,4 +1,4 @@
-FROM openshift/origin:latest
+FROM openshift/origin:v3.9
 
 MAINTAINER Mateus Caruccio <mateus.caruccio@getupcloud.com>
 
