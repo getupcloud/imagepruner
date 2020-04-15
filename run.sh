@@ -4,6 +4,7 @@ keep_complete=${KEEP_COMPLETE:-10}
 keep_failed=${KEEP_FAILED:-10}
 keep_tags=${KEEP_TAGS:-10}
 keep_younger=${KEEP_YOUNGER:-720h}
+all=${PRUNE_EXTERNAL-true}
 
 # only needed for writing a kubeconfig:
 master_url=${MASTER_URL:-https://kubernetes.default.svc.cluster.local:443}
@@ -40,10 +41,11 @@ for i in deployments builds; do
   eval $cmd
 done
 
-#prune images 
+#prune images
 cmd="oc adm prune images \
 --keep-tag-revisions=$keep_tags \
 --keep-younger-than=$keep_younger \
+--all=$all \
 --confirm"
 echo
 echo "---> $cmd"
