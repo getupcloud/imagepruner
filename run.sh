@@ -45,7 +45,7 @@ done
 cmd="oc adm prune images \
 --keep-tag-revisions=$keep_tags \
 --keep-younger-than=$keep_younger \
---all=$all
+--all=$all \
 --confirm"
 echo
 echo "---> $cmd"
