@@ -17,6 +17,8 @@ spec:
         value: ${KEEP_TAGS}
       - name: KEEP_YOUNGER
         value: ${KEEP_YOUNGER}
+      - name: PRUNE_EXTERNAL
+        value: ${PRUNE_EXTERNAL}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
   serviceAccount: image-pruner
